@@ -6,7 +6,7 @@ function Home() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     try {
       const response = await fetch('https://penetration-testing-web-server.vercel.app/execute', {
         method: 'POST',
@@ -14,13 +14,11 @@ function Home() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ input }),
-        mode: 'no-cors', // Setting mode to 'no-cors'
+        mode: 'no-cors',
       });
-  
-      // Accessing response data isn't possible in 'no-cors' mode
-      console.log('Response:', response); // This will log a CORS-safelisted response
-  
-      // Handle your response here (accessing response data isn't possible in 'no-cors' mode)
+
+      const data = await response.text();
+      setOutput(data);
     } catch (error) {
       console.error('Error:', error);
     }

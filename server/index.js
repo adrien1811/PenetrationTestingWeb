@@ -7,8 +7,9 @@ const port = 3001;
 
 app.use(express.json());
 
+// Set CORS policy using cors middleware before defining routes
 app.use(cors({
-  origin: "https://penetration-testing-web-client.vercel.app/", // Allow requests from all origins (Replace this with your frontend URL in production)
+  origin: "https://penetration-testing-web-client.vercel.app/home", // Allow requests from your frontend URL
   methods: ["POST", "GET"],
   credentials: true
 }));
@@ -26,9 +27,8 @@ app.post('/execute', (req, res) => {
       return;
     }
     
-    // Set the CORS header here
-    res.header('Access-Control-Allow-Origin', '*'); // Set it to '*' for all origins
-    
+    // No need to manually set the CORS header here
+
     res.send(`Output: ${stdout}`);
   });
 });
