@@ -8,13 +8,12 @@ function Home() {
     e.preventDefault();
 
     try {
-      const response = await fetch('https://penetration-testing-web-server.vercel.app/execute', {
+      const response = await fetch('http://localhost:3001/execute', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ input }),
-        mode: 'cors',
       });
 
       const data = await response.text();
