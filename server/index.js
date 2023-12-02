@@ -5,14 +5,15 @@ const cors = require('cors');
 const app = express();
 const port = process.env.PORT || 3001; // Adjust the port as needed
 
-app.use(cors());
 app.use(express.json());
 
-app.use(cors({
+const corsOptions = {
   origin: 'https://penetration-testing-web-client.vercel.app',
   methods: ['POST', 'GET'],
   credentials: true
-}));
+};
+
+app.use(cors(corsOptions));
 
 app.post('/execute', (req, res) => {
   const userInput = req.body.input;
@@ -26,6 +27,8 @@ app.post('/execute', (req, res) => {
       res.status(500).send(`Error: ${stderr}`);
       return;
     }
+
+    // Set CORS headers in the response
     res.header('Access-Control-Allow-Origin', 'https://penetration-testing-web-client.vercel.app');
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
     res.header('Access-Control-Allow-Headers', 'Content-Type');
