@@ -5,16 +5,13 @@ const cors = require('cors');
 const app = express();
 const port = 3001;
 
-app.use(cors());
 app.use(express.json());
 
-app.use(cors(
-  {
-origin:["https://penetration-testing-web-client.vercel.app/"],
-methods: ["POST", "GET"],
-credentials: true
-   }
-));
+app.use(cors({
+  origin: ["https://penetration-testing-web-client.vercel.app/"],
+  methods: ["POST", "GET"],
+  credentials: true
+}));
 
 app.post('/execute', (req, res) => {
   const userInput = req.body.input;
