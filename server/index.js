@@ -8,15 +8,13 @@ const port = process.env.PORT || 3001; // Adjust the port as needed
 app.use(express.json());
 
 const corsOptions = {
-  origin: 'https://penetration-testing-web-client.vercel.app',
+  origin: '*', // Allow requests from any origin (replace with specific origins for production)
   methods: ['POST', 'GET'],
   credentials: true,
-  optionsSuccessStatus: 200 // This is added to ensure that OPTIONS requests return a 200 status code
+  optionsSuccessStatus: 200,
 };
 
 app.use(cors(corsOptions));
-
-app.options('*', cors(corsOptions)); // Enable preflight requests for all routes
 
 app.post('/execute', (req, res) => {
   const userInput = req.body.input;
