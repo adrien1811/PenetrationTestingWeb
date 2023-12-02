@@ -14,7 +14,7 @@ function Home() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ input }),
-        mode: 'no-cors',
+        mode: 'cors',
       });
 
       const data = await response.text();
