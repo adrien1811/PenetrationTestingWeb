@@ -3,11 +3,11 @@ const { exec } = require('child_process');
 const cors = require('cors');
 
 const app = express();
-const port = process.env.PORT || 3001; // Adjust the port as needed
+const port = process.env.PORT || 3001;
 
 app.use(cors({
   origin: "https://penetration-testing-web-client.vercel.app",
-  methods: ["POST", "GET"],
+  methods: ["POST"],
   credentials: true
 }));
 app.use(express.json());
@@ -24,10 +24,6 @@ app.post('/execute', (req, res) => {
       res.status(500).send(`Error: ${stderr}`);
       return;
     }
-
-    res.header('Access-Control-Allow-Origin', 'https://penetration-testing-web-client.vercel.app');
-    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-    res.header('Access-Control-Allow-Headers', 'Content-Type');
 
     res.send(`Output: ${stdout}`);
   });
