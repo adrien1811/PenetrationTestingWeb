@@ -6,7 +6,7 @@ const app = express();
 const port = process.env.PORT || 3001;
 
 const corsOptions = {
-  origin: "https://penetration-testing-web-client.vercel.app/",
+  origin: "https://penetration-testing-web-client.vercel.app",
   methods: ["POST"],
   credentials: true,
   optionsSuccessStatus: 200
@@ -30,7 +30,7 @@ app.post('/execute', (req, res) => {
       return;
     }
 
-    res.header('Access-Control-Allow-Origin', 'https://penetration-testing-web-client.vercel.app/');
+    res.header('Access-Control-Allow-Origin', 'https://penetration-testing-web-client.vercel.app');
     res.send(`Output: ${stdout}`);
   });
 });
