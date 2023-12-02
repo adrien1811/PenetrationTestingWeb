@@ -3,12 +3,12 @@ const { exec } = require('child_process');
 const cors = require('cors');
 
 const app = express();
-const port = process.env.PORT || 3001; // Adjust the port as needed
+const port = process.env.PORT || 3001;
 
 app.use(express.json());
 
 const corsOptions = {
-  origin: '*', // Allow requests from any origin (replace with specific origins for production)
+  origin: '*', // Change this to the specific frontend URL for production
   methods: ['POST', 'GET'],
   credentials: true,
   optionsSuccessStatus: 200,
@@ -29,6 +29,7 @@ app.post('/execute', (req, res) => {
       return;
     }
 
+    res.header('Access-Control-Allow-Origin', '*'); // Add this line to set the header
     res.send(`Output: ${stdout}`);
   });
 });
