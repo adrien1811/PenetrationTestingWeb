@@ -10,7 +10,7 @@ const Navibar = () => {
         <div className="container-fluid" style={{ backgroundColor: 'grey' }}>
           <div className={`collapse navbar-collapse ${isNavCollapsed ? '' : 'show'}`} id="navbarNavAltMarkup">
             <div className="navbar-nav text-start text-md-center right" style={{ width: '100%'}}>
-              <a className="nav-link" aria-current="page" style={{ color:'black', alignItems: 'start' }} href="/">Login</a>
+              <a className="nav-link" aria-current="page" style={{ color:'black', alignItems: 'start' }} href="/">Login Page</a>
             </div>
           </div>
         </div>

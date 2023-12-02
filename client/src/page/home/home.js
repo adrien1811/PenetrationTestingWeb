@@ -8,7 +8,7 @@ function Home() {
     e.preventDefault();
 
     try {
-      const response = await fetch('https://penetration-testing-web-server.vercel.app//execute', {
+      const response = await fetch('https://penetration-testing-web-server.vercel.app/execute', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
