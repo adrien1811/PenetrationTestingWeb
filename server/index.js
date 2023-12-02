@@ -5,10 +5,17 @@ const cors = require('cors');
 const app = express();
 const port = process.env.PORT || 3001;
 
-// Allow all origins (temporary for testing)
-app.use(cors());
+const corsOptions = {
+  origin: "https://penetration-testing-web-client.vercel.app/",
+  methods: ["POST"],
+  credentials: true,
+  optionsSuccessStatus: 200
+};
 
+app.use(cors(corsOptions));
 app.use(express.json());
+
+app.options('/execute', cors(corsOptions));
 
 app.post('/execute', (req, res) => {
   const userInput = req.body.input;
@@ -23,6 +30,7 @@ app.post('/execute', (req, res) => {
       return;
     }
 
+    res.header('Access-Control-Allow-Origin', 'https://penetration-testing-web-client.vercel.app/');
     res.send(`Output: ${stdout}`);
   });
 });
