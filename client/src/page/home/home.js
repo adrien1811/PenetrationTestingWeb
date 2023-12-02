@@ -12,8 +12,10 @@ function Home() {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': 'https://penetration-testing-web-client.vercel.app', // Add this header
         },
         body: JSON.stringify({ input }),
+        mode: 'cors', // Set the mode to 'cors'
       });
 
       const data = await response.text();
