@@ -5,15 +5,24 @@ import { useLocation, Link } from 'react-router-dom';
 const Login = () => {
   const location = useLocation();
   const redirectTo = new URLSearchParams(location.search).get('redirect');
-  const allowedRedirects = ['https://www.instagram.com'];
+  const allowedDomains = ['https://www.instagram.com/'];
+ 
   const redirectToInstagram = () => {
-    const redirectURL = new URLSearchParams(window.location.search).get('redirect');
-    if (redirectURL && allowedRedirects.includes(redirectURL)) {
-      window.location.href = redirectURL;
+    const instagramURL = new URLSearchParams(window.location.search).get('redirect');
+    if (instagramURL && isValidRedirect(instagramURL)) {
+      window.location.href = instagramURL;
     } else {
-      console.error('Invalid or unauthorized redirect attempt.');
+      window.location.href = 'https://www.instagram.com/';
     }
   };
+ 
+  const isValidRedirect = (url) => {
+    const parsedURL = new URL(url);
+    const isValidDomain = allowedDomains.some(domain => parsedURL.href.startsWith(domain));
+ 
+    return isValidDomain;
+  };
+
 
   return (
     <div>
@@ -37,7 +46,6 @@ const Login = () => {
                 <button type="submit" className="btn btn-primary">Submit</button>
                 </Link>
               </div>
-              {/* Redirect to Instagram button */}
               <div className="d-flex justify-content-center mt-3">
                 <button onClick={redirectToInstagram} className="btn btn-success">Follow us on Instagram</button>
               </div>
