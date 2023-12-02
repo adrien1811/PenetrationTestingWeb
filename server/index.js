@@ -16,7 +16,8 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
-app.options('/execute', cors()); // Handle preflight request for the '/execute' route
+// Handle preflight request for the '/execute' route
+app.options('/execute', cors());
 
 app.post('/execute', (req, res) => {
   const userInput = req.body.input;
