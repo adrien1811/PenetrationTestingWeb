@@ -9,12 +9,14 @@ function Home() {
 
     try {
       const response = await fetch('https://penetration-testing-web-server.vercel.app/execute', {
+        mode: 'no-cors',
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': 'https://penetration-testing-web-client.vercel.app', // Add this header
         },
         body: JSON.stringify({ input }),
-        mode: 'cors',
+        mode: 'cors', // Set the mode to 'cors'
       });
 
       const data = await response.text();
