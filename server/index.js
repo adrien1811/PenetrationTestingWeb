@@ -5,11 +5,9 @@ const cors = require('cors');
 const app = express();
 const port = process.env.PORT || 3001;
 
-app.use(cors({
-  origin: "https://penetration-testing-web-client.vercel.app",
-  methods: ["POST"],
-  credentials: true
-}));
+// Allow all origins (temporary for testing)
+app.use(cors());
+
 app.use(express.json());
 
 app.post('/execute', (req, res) => {
