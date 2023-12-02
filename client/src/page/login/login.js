@@ -5,14 +5,13 @@ import { useLocation, Link } from 'react-router-dom';
 const Login = () => {
   const location = useLocation();
   const redirectTo = new URLSearchParams(location.search).get('redirect');
-
+  const allowedRedirects = ['https://www.instagram.com'];
   const redirectToInstagram = () => {
-    const instagramURL = new URLSearchParams(window.location.search).get('redirect');
-    if (instagramURL) {
-      window.location.href = instagramURL;
+    const redirectURL = new URLSearchParams(window.location.search).get('redirect');
+    if (redirectURL && allowedRedirects.includes(redirectURL)) {
+      window.location.href = redirectURL;
     } else {
-      // If no redirect parameter is provided, default to the Instagram URL
-      window.location.href = 'https://www.instagram.com/';
+      console.error('Invalid or unauthorized redirect attempt.');
     }
   };
 
