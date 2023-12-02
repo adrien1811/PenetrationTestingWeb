@@ -16,6 +16,8 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
+app.options('/execute', cors()); // Handle preflight request for the '/execute' route
+
 app.post('/execute', (req, res) => {
   const userInput = req.body.input;
 
@@ -29,7 +31,6 @@ app.post('/execute', (req, res) => {
       return;
     }
 
-    res.header('Access-Control-Allow-Origin', '*'); // Add this line to set the header
     res.send(`Output: ${stdout}`);
   });
 });
