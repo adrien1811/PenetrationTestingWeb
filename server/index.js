@@ -9,7 +9,7 @@ app.use(express.json());
 
 // Set CORS policy using cors middleware before defining routes
 app.use(cors({
-  origin: "https://penetration-testing-web-client.vercel.app/home", // Allow requests from your frontend URL
+  origin: "https://penetration-testing-web-client.vercel.app/", // Allow requests from your frontend URL
   methods: ["POST", "GET"],
   credentials: true
 }));
