@@ -8,7 +8,7 @@ const port = process.env.PORT || 3001;
 app.use(express.json());
 
 const corsOptions = {
-  origin: '*', // Change this to the specific frontend URL for production
+  origin: 'https://penetration-testing-web-client.vercel.app/', // Change this to the specific frontend URL for production
   methods: ['POST', 'GET'],
   credentials: true,
   optionsSuccessStatus: 200,
