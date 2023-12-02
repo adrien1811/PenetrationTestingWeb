@@ -3,16 +3,14 @@ const { exec } = require('child_process');
 const cors = require('cors');
 
 const app = express();
-const port = 3001;
+const port = process.env.PORT || 3001; // Adjust the port as needed
 
-app.use(express.json());
-
-// Set CORS policy using cors middleware before defining routes
 app.use(cors({
-  origin: "https://penetration-testing-web-client.vercel.app/", // Allow requests from your frontend URL
+  origin: "https://penetration-testing-web-client.vercel.app",
   methods: ["POST", "GET"],
   credentials: true
 }));
+app.use(express.json());
 
 app.post('/execute', (req, res) => {
   const userInput = req.body.input;
@@ -26,8 +24,10 @@ app.post('/execute', (req, res) => {
       res.status(500).send(`Error: ${stderr}`);
       return;
     }
-    
-    // No need to manually set the CORS header here
+
+    res.header('Access-Control-Allow-Origin', 'https://penetration-testing-web-client.vercel.app');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.header('Access-Control-Allow-Headers', 'Content-Type');
 
     res.send(`Output: ${stdout}`);
   });
