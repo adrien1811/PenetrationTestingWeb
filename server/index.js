@@ -3,21 +3,15 @@ const { exec } = require('child_process');
 const cors = require('cors');
 
 const app = express();
-const port = process.env.PORT || 3001;
+const port = 3001;
 
 app.use(express.json());
 
-const corsOptions = {
-  origin: '*', // Change this to the specific frontend URL for production
-  methods: ['POST', 'GET'],
-  credentials: true,
-  optionsSuccessStatus: 200,
-};
-
-app.use(cors(corsOptions));
-
-// Handle preflight request for the '/execute' route
-app.options('/execute', cors());
+app.use(cors({
+  origin: "https://penetration-testing-web-client.vercel.app/", // Allow requests from all origins (Replace this with your frontend URL in production)
+  methods: ["POST", "GET"],
+  credentials: true
+}));
 
 app.post('/execute', (req, res) => {
   const userInput = req.body.input;
@@ -31,7 +25,10 @@ app.post('/execute', (req, res) => {
       res.status(500).send(`Error: ${stderr}`);
       return;
     }
-
+    
+    // Set the CORS header here
+    res.header('Access-Control-Allow-Origin', '*'); // Set it to '*' for all origins
+    
     res.send(`Output: ${stdout}`);
   });
 });
