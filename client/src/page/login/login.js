@@ -1,22 +1,25 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import './login.css';
-import { Link } from 'react-router-dom'; 
-const login =() =>{
-    const handleSubmit = (e) => {
-    e.preventDefault();
-    }
+import { useLocation } from 'react-router-dom';
+
+const Login = () => {
+  const location = useLocation();
+  const redirectTo = new URLSearchParams(location.search).get('redirect');
+
+  const redirectToInstagram = () => {
+    const instagramURL = 'https://www.instagram.com/'; // Replace with your desired Instagram URL
+    window.location.href = instagramURL;
+  };
+
   return (
     <div>
-    <section className="ftco-section ftco-no-pt d-flex justify-content-md-center justify-content-center align-items-md-start align-items-start gradient-container2" style={{ backgroundColor: 'white' }}>
-      <div className="container">
-        <div className="row align-items-center justify-content-center">
-          <h1 style={{ fontSize: '20px', color: 'black', textAlign: 'center', paddingTop: '150px' }}>
-            Halaman Login
-          </h1>
-          <div className="col-md-5">
-            <form onSubmit={handleSubmit}>
+      <section className="ftco-section ftco-no-pt d-flex justify-content-md-center justify-content-center align-items-md-start align-items-start gradient-container2" style={{ backgroundColor: 'white' }}>
+        <div className="container">
+          <div className="row align-items-center justify-content-center">
+            <h1 style={{ fontSize: '20px', color: 'black', textAlign: 'center', paddingTop: '150px' }}>
+              Halaman Login
+            </h1>
+            <div className="col-md-5">
               <div className="mb-3">
                 <label htmlFor="exampleFormControlInput1" className="form-label" style={{ color: 'white' }}>Email</label>
                 <input type="email" className="form-control" id="exampleFormControlInput1" placeholder="your email" />
@@ -26,17 +29,19 @@ const login =() =>{
                 <input type="password" className="form-control" id="exampleFormControlInput1" placeholder="your password" />
               </div>
               <div className="d-flex justify-content-center">
-              <Link to="/home">
+                {/* Your form and submit button */}
                 <button type="submit" className="btn btn-primary">Submit</button>
-                </Link>
               </div>
-            </form>
+              {/* Redirect to Instagram button */}
+              <div className="d-flex justify-content-center mt-3">
+                <button onClick={redirectToInstagram} className="btn btn-success">Follow us on Instagram</button>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
-  </div>
+      </section>
+    </div>
   );
 }
 
-export default login;
+export default Login;
