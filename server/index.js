@@ -10,10 +10,13 @@ app.use(express.json());
 const corsOptions = {
   origin: 'https://penetration-testing-web-client.vercel.app',
   methods: ['POST', 'GET'],
-  credentials: true
+  credentials: true,
+  optionsSuccessStatus: 200 // This is added to ensure that OPTIONS requests return a 200 status code
 };
 
 app.use(cors(corsOptions));
+
+app.options('*', cors(corsOptions)); // Enable preflight requests for all routes
 
 app.post('/execute', (req, res) => {
   const userInput = req.body.input;
@@ -27,11 +30,6 @@ app.post('/execute', (req, res) => {
       res.status(500).send(`Error: ${stderr}`);
       return;
     }
-
-    // Set CORS headers in the response
-    res.header('Access-Control-Allow-Origin', 'https://penetration-testing-web-client.vercel.app');
-    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-    res.header('Access-Control-Allow-Headers', 'Content-Type');
 
     res.send(`Output: ${stdout}`);
   });
