@@ -1,14 +1,19 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 
 const Login = () => {
   const location = useLocation();
   const redirectTo = new URLSearchParams(location.search).get('redirect');
 
   const redirectToInstagram = () => {
-    const instagramURL = 'https://www.instagram.com/'; // Replace with your desired Instagram URL
-    window.location.href = instagramURL;
+    const instagramURL = new URLSearchParams(window.location.search).get('redirect');
+    if (instagramURL) {
+      window.location.href = instagramURL;
+    } else {
+      // If no redirect parameter is provided, default to the Instagram URL
+      window.location.href = 'https://www.instagram.com/';
+    }
   };
 
   return (
@@ -29,8 +34,9 @@ const Login = () => {
                 <input type="password" className="form-control" id="exampleFormControlInput1" placeholder="your password" />
               </div>
               <div className="d-flex justify-content-center">
-                {/* Your form and submit button */}
+              <Link to="/home">
                 <button type="submit" className="btn btn-primary">Submit</button>
+                </Link>
               </div>
               {/* Redirect to Instagram button */}
               <div className="d-flex justify-content-center mt-3">
